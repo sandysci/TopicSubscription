@@ -1,5 +1,4 @@
 
-const csv = require('csv-parser');
 const fs = require('fs').promises;
 
 
@@ -14,30 +13,50 @@ function hasDecimal (num) {
     return num % 1 !== 0;
 }
 
-
-exports.echo = async (req, res) => {
+async function  validateCSVRules(req){
     try {
 
         let {file} =  req.files;
+        let finalArray = [];
 
         let data = await fs.readFile(file.tempFilePath);
         if(data.length <= 0)
-            return errorResponse(res, "csv cannot be empty, enter a valid csv");
+            return {error: "csv cannot be empty, enter a valid csv"};
 
         let row =  data.toString().split('\n');
 
         let len = row.length;
         for(let i = 0 ; i < len ; i++){
             let word = row[i].split(',');
-            if(word.length != len  ){
-                return errorResponse(res, "Invalid csv !!!  row length must be equal to the total columns length ");
+            if(word.length !== len  ){
+                return  {error:  "Invalid csv !!!  row length must be equal to the total columns length "};
             }
 
             if(!IsValidInteger(word))
-                return errorResponse(res, "Invalid csv type found, only integers are allowed ")
+                return{error: "Invalid csv type found, only integers are allowed "};
+            finalArray.push(word);
+        }
+        return  {data: finalArray,result:data};
 
-            }
-        return successResponseText(res, data);
+
+
+
+
+    }
+    catch (e) {
+        console.log("exception",e);
+        return {error:  e.message};
+    }
+}
+
+
+exports.echo = async (req, res) => {
+    try {
+
+        let {error,result:finalArray} = await validateCSVRules(req);
+        if(error)
+            return errorResponse(res, error);
+        return successResponseText(res, finalArray);
 
 
 
@@ -48,40 +67,35 @@ exports.echo = async (req, res) => {
 };
 
 
+// O(n log n)
 
+//The example above will do only 6 iterations.
+// For bigger matrix, say 100x100 it will do 4,900 iterations, this is 51% faster than any other solution provided here.
+//
+// The principle is simple, you on only iterate through the upper diagonal half of the matrix, because the diagonal line never changes and the bottom diagonal half being is switched together with the upper one, so there is no reason to iterate through it as well. This way, you save a lot of running time, especially in a large matrix.
 exports.invert = async (req, res) => {
     try {
+    let result = '';
+       let {error,data:finalArray} = await validateCSVRules(req);
 
-        let {file} =  req.files;
-        let result = '';
-        let finalArray = [];
+        if(error)
+            return errorResponse(res, error);
 
-        let data = await fs.readFile(file.tempFilePath);
-        if(data.length <= 0)
-            return errorResponse(res, "csv cannot be empty, enter a valid csv");
+        finalArray.every((r, i, a) => (r.every((_, j) => (
+                    // console.log(a.length,j),
+                     j = a.length-j-1,
+                    [ r[j], a[j][i] ] = [ a[j][i], r[j] ],
+                     i < j-1
+            )),
 
-        let row =  data.toString().split('\n');
+            i < finalArray.length-2,
 
-        let len = row.length;
-        for(let i = 0 ; i < len ; i++){
-            let word = row[i].split(',');
-            if(word.length != len  ){
-                return errorResponse(res, "Invalid csv !!!  row length must be equal to the total columns length ");
-            }
+             result+=r.join()+"\n"
+        )
+        );
 
-            if(!IsValidInteger(word))
-                return errorResponse(res, "Invalid csv type found, only integers are allowed ");
-           finalArray.push(word);
 
-        }
-        console.log("finalArray",finalArray);
-
-        for(let j = 0 ; j < finalArray.length; j++){
-            console.log("each",finalArray[j][j]);
-            result += finalArray[j][j].toString();
-        }
-
-        return successResponseText(res, result);
+        return successResponseText(res, result );
 
 
 
@@ -94,27 +108,12 @@ exports.invert = async (req, res) => {
 exports.flatten = async (req, res) => {
     try {
 
-        let {file} =  req.files;
-        let finalArray = [];
         let result = '';
+        let {error,data:finalArray} = await validateCSVRules(req);
 
-        let data = await fs.readFile(file.tempFilePath);
-        if(data.length <= 0)
-            return errorResponse(res, "csv cannot be empty, enter a valid csv");
+        if(error)
+            return errorResponse(res, error);
 
-        let row =  data.toString().split('\n');
-
-        let len = row.length;
-        for(let i = 0 ; i < len ; i++){
-            let word = row[i].split(',');
-            if(word.length != len  ){
-                return errorResponse(res, "Invalid csv !!!  row length must be equal to the total columns length ");
-            }
-
-            if(!IsValidInteger(word))
-                return errorResponse(res, "Invalid csv type found, only integers are allowed ");
-            finalArray.push(word);
-        }
 
         for(let j = 0 ; j < finalArray.length; j++){
             console.log("each",finalArray[j]);
@@ -122,7 +121,7 @@ exports.flatten = async (req, res) => {
             if(j !== finalArray.length -1 ){
                 add = ',';
             }
-            result += finalArray[j].join()+add;
+            result += finalArray[j]+add;
         }
 
 
@@ -140,28 +139,13 @@ exports.flatten = async (req, res) => {
 exports.sum = async (req, res) => {
     try {
 
-        let {file} =  req.files;
-        let finalArray = [];
+
         let sum = 0;
 
-        let data = await fs.readFile(file.tempFilePath);
-        if(data.length <= 0)
-            return errorResponse(res, "csv cannot be empty, enter a valid csv");
+        let {error,data:finalArray} = await validateCSVRules(req);
 
-        let row =  data.toString().split('\n');
-
-        let len = row.length;
-        for(let i = 0 ; i < len ; i++){
-            let word = row[i].split(',');
-            if(word.length != len  ){
-                return errorResponse(res, "Invalid csv !!!  row length must be equal to the total columns length ");
-            }
-
-            if(!IsValidInteger(word))
-                return errorResponse(res, "Invalid csv type found, only integers are allowed ");
-            finalArray.push(word);
-        }
-
+        if(error)
+            return errorResponse(res, error);
 
         for(let j = 0 ; j < finalArray.length; j++){
 
@@ -183,28 +167,11 @@ exports.sum = async (req, res) => {
 exports.multiply = async (req, res) => {
     try {
 
-        let {file} =  req.files;
-        let finalArray = [];
         let product = 1;
+        let {error,data:finalArray} = await validateCSVRules(req);
 
-        let data = await fs.readFile(file.tempFilePath);
-        if(data.length <= 0)
-            return errorResponse(res, "csv cannot be empty, enter a valid csv");
-
-        let row =  data.toString().split('\n');
-
-        let len = row.length;
-        for(let i = 0 ; i < len ; i++){
-            let word = row[i].split(',');
-            if(word.length != len  ){
-                return errorResponse(res, "Invalid csv !!!  row length must be equal to the total columns length ");
-            }
-
-            if(!IsValidInteger(word))
-                return errorResponse(res, "Invalid csv type found, only integers are allowed ");
-            finalArray.push(word);
-        }
-        console.log("final Array",finalArray);
+        if(error)
+            return errorResponse(res, error);
 
         for(let j = 0 ; j < finalArray.length; j++){
             product *= finalArray[j].reduce((a, b) => parseInt(a) * parseInt(b), 1);
