@@ -49,7 +49,9 @@ async function  validateCSVRules(req){
     }
 }
 
-
+/*
+* returns the list of matrix after validation
+ */
 exports.echo = async (req, res) => {
     try {
 
@@ -65,6 +67,7 @@ exports.echo = async (req, res) => {
         return errorResponse(res, e.message);
     }
 };
+
 
 
 // O(n log n)
