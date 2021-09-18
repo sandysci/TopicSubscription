@@ -75,7 +75,7 @@ const setupExpress = async () => {
          * Get port from environment and store in Express.
          */
 
-        const port = normalizePort('3000');
+        const port = process.env.PORT ||normalizePort('8080');
         app.set('port', port);
         log(" Server Starting up ON", port, 'Matrix manipulation');
         /**
