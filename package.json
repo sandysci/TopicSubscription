@@ -1,7 +1,7 @@
 {
   "name": "matrix-manipulation",
   "version": "1.0.0",
-  "description": "This converts nomrmal date to timestamp for tm30",
+  "description": "This manipulated csv matrix ",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --verbose --env=node",
@@ -15,7 +15,8 @@
     "url": "https://gitlab.com/chiomatm30"
   },
   "keywords": [
-    "matrix"
+    "matrix",
+    "csv"
   ],
   "author": "Ezeibe Sandra Chioma",
   "license": "ISC",
