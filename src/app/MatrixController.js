@@ -13,13 +13,16 @@ function hasDecimal (num) {
     return num % 1 !== 0;
 }
 
-async function  validateCSVRules(req){
+
+
+    async function  validateCSVRules(req){
     try {
 
-        let {file} =  req.files;
+        let {file} =  req?.files || req?.body;
         let finalArray = [];
 
-        let data = await fs.readFile(file.tempFilePath);
+
+        let data = await fs.readFile(file?.tempFilePath|| file) ;
         if(data.length <= 0)
             return {error: "csv cannot be empty, enter a valid csv"};
 
