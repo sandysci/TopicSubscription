@@ -1,10 +1,11 @@
 {
-  "name": "tm-timestamp",
+  "name": "matrix-manipulation",
   "version": "1.0.0",
   "description": "This converts nomrmal date to timestamp for tm30",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --env=node"
+    "test": "jest --watchAll --verbose --env=node",
+    "start": "nodemon index.js"
   },
   "jest": {
     "testEnvironment": "node"
@@ -14,18 +15,17 @@
     "url": "https://gitlab.com/chiomatm30"
   },
   "keywords": [
-    "timestamp",
-    "tm",
-    "tm30",
-    "date",
-    "time",
-    "datetime",
-    "utils"
+    "matrix"
   ],
   "author": "Ezeibe Sandra Chioma",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "jest": "^24.9.0"
+    "csv-parser": "^3.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.12"
   }
 }
