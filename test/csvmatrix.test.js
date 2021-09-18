@@ -7,6 +7,9 @@ const { expect } = chai;
 chai.use(chaiHttp);
 const csvfilepath = fs.readFileSync(`${__dirname}/matrix.csv`);
 
+/**
+ * Test CSV matrix Echo endpoint with the matrix.csv file in the test directory
+ */
 describe('CSV Matrix Echo', () => {
     it('Get CSV Matrix Echo ', async () => {
         const res  = await  chai.request(server)
@@ -24,7 +27,9 @@ describe('CSV Matrix Echo', () => {
   
 
   });
-
+/**
+ * Test CSV matrix Invert endpoint with the matrix.csv file in the test directory
+ */
 describe('CSV Matrix Invert', () => {
     it('Get CSV Matrix Invert ', async () => {
         const res  = await  chai.request(server)
@@ -43,6 +48,9 @@ describe('CSV Matrix Invert', () => {
 
 });
 
+/**
+ * Test CSV matrix flatten endpoint with the matrix.csv file in the test directory
+ */
 describe('CSV Matrix Flatten', () => {
     it('Get CSV Matrix Flatten ', async () => {
         const res  = await  chai.request(server)
@@ -61,6 +69,9 @@ describe('CSV Matrix Flatten', () => {
 
 });
 
+/**
+ * Test CSV matrix sum endpoint with the matrix.csv file in the test directory
+ */
 describe('CSV Matrix Sum', () => {
     it('Get CSV Matrix Sum ', async () => {
         const res  = await  chai.request(server)
@@ -79,6 +90,9 @@ describe('CSV Matrix Sum', () => {
 
 });
 
+/**
+ * Test CSV matrix multiply endpoint with the matrix.csv file in the test directory
+ */
 describe('CSV Matrix Multiply', () => {
     it('Get CSV Matrix Multiply ', async () => {
         const res  = await  chai.request(server)

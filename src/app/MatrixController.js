@@ -1,19 +1,32 @@
 
 const fs = require('fs').promises;
 
-
-/**
- * @return {boolean}
+/***
+ * Validate a number is an Integer
+ * @param words
+ * @returns {boolean}
  */
 function IsValidInteger(words) {
     return !words.some(isNaN && hasDecimal );
 
 }
+
+/***
+ * Validate the number is a decimal or float number
+ * @param num
+ * @returns {boolean}
+ * *
+ */
 function hasDecimal (num) {
     return num % 1 !== 0;
 }
 
-
+/***
+ * Validate CSv to ensure it is not empty and it is square matrix(i.e no of row == no of column)
+ * Validate each value is a valid Integer
+ * @param req
+ * @returns {Promise<{error: string}|{error: *}|{result: *, data: *}>}
+ */
 
     async function  validateCSVRules(req){
     try {
@@ -23,6 +36,7 @@ function hasDecimal (num) {
 
 
         let data = await fs.readFile(file?.tempFilePath|| file) ;
+        // check csv is not empty
         if(data.length <= 0)
             return {error: "csv cannot be empty, enter a valid csv"};
 
@@ -31,10 +45,11 @@ function hasDecimal (num) {
         let len = row.length;
         for(let i = 0 ; i < len ; i++){
             let word = row[i].split(',');
+            // check number of rows == number of columns
             if(word.length !== len  ){
                 return  {error:  "Invalid csv !!!  row length must be equal to the total columns length "};
             }
-
+            // checks if it is a valid integer
             if(!IsValidInteger(word))
                 return{error: "Invalid csv type found, only integers are allowed "};
             finalArray.push(word);
@@ -52,8 +67,11 @@ function hasDecimal (num) {
     }
 }
 
-/*
-* returns the list of matrix after validation
+/****
+ * Returns the Echo of CSV matrix after validation in string format
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
  */
 exports.echo = async (req, res) => {
     try {
@@ -72,13 +90,20 @@ exports.echo = async (req, res) => {
 };
 
 
-
+//NOTE for Invert:
 // O(n log n)
 
 //The example above will do only 6 iterations.
 // For bigger matrix, say 100x100 it will do 4,900 iterations, this is 51% faster than any other solution provided here.
 //
 // The principle is simple, you on only iterate through the upper diagonal half of the matrix, because the diagonal line never changes and the bottom diagonal half being is switched together with the upper one, so there is no reason to iterate through it as well. This way, you save a lot of running time, especially in a large matrix.
+
+/***
+ * Returns the Invert of CSV matrix after validation in string format
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 exports.invert = async (req, res) => {
     try {
     let result = '';
@@ -99,18 +124,18 @@ exports.invert = async (req, res) => {
              result+=r.join()+"\n"
         )
         );
-
-
         return successResponseText(res, result );
-
-
-
     }
     catch (e) {
         return errorResponse(res, e.message);
     }
 };
-
+/****
+ * Returns the Flatten of CSV matrix after validation in string format
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 exports.flatten = async (req, res) => {
     try {
 
@@ -141,15 +166,17 @@ exports.flatten = async (req, res) => {
     }
 };
 
-
+/****
+ * Returns the sum of CSV matrix after validation in string format as a number
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 exports.sum = async (req, res) => {
     try {
 
-
         let sum = 0;
-
         let {error,data:finalArray} = await validateCSVRules(req);
-
         if(error)
             return errorResponse(res, error);
 
@@ -161,8 +188,6 @@ exports.sum = async (req, res) => {
 
         return successResponseText(res, sum.toString());
 
-
-
     }
     catch (e) {
         console.log("exception",e);
@@ -170,6 +195,12 @@ exports.sum = async (req, res) => {
     }
 };
 
+/****
+ * Returns the multiplication of CSV matrix after validation in string format as a number
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 exports.multiply = async (req, res) => {
     try {
 
@@ -185,8 +216,6 @@ exports.multiply = async (req, res) => {
         console.log("product----",product);
 
         return successResponseText(res, product.toString());
-
-
 
     }
     catch (e) {

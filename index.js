@@ -111,4 +111,5 @@ const setupExpress = async () => {
         process.exit(1)
     }
 };
+// start server
 setupExpress();

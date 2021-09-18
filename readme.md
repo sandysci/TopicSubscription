@@ -1,42 +1,94 @@
-tm-timestamp
+BACKEND LEAGUE CHALLENGE CSV MATRIX 
 ===========
-tm-timestamp - This is a utility package to get TimeStamp for datetime passed
+League csv-matrix - This is the solution for league backend challenge
 
 ## Installation
-```json
-"dependencies": {
-  "tm-timestamp": "1.0.0" // see the "releases" section
-}
 ```
-```npm install tm-timestamp```
-## Requirements
-```javascript
-const utils = require('tm-timestamp');
+- Open terminal
+- install npm ( >= version 6)
+- install node js (>= version 14)
+- confirm installation of node with this commands(node -v and npm -v)
+- install git on local machine
+- clone project using this command git clone https://github.com/sandysci/MatrixLeague.git
+- or 
+- clone project using this command git clone git@github.com:sandysci/MatrixLeague.git
+- pull from main branch or master branch 
+- npm install
+- npm run dev 
+
 ```
 
-### TimeStamp Getter for Now 
-- To get a timestamp now
+
+### CSV Matrix Echo  
+- To print csv matrix echo
+- Test command below with terminal 
+- Note: this must be a valid path in your machine @/Users/Sandy/Downloads/matrix.csv
+- http://localhost:8080 is your local port and server.
+- You can use this url to test live https://csvmatrix.herokuapp.com/echo 
 ```javascript
-let datetime = timestamp.getTimeStampNow();
-console.log(datetime); //1578312236075
+curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/echo
+
+Output = "1,2,3\n4,5,6\n7,8,9"
+```
+### CSV Matrix Invert  
+- To print csv matrix invert
+- Test command below with terminal 
+- Note: this must be a valid path in your machine @/Users/Sandy/Downloads/matrix.csv
+- http://localhost:8080 is your local port and server.
+- You can use this url to test live https://csvmatrix.herokuapp.com/invert 
+```javascript
+curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/invert
+
+Output = "1,4,7\n2,5,8\n3,6,9\n"
 ```
 
-### TimeStamp Getter for Now 
-- To get a timestamp from a datetime
+### CSV Matrix flatten  
+- To print csv matrix flatten
+- Test command below with terminal 
+- Note: this must be a valid path in your machine @/Users/Sandy/Downloads/matrix.csv
+- http://localhost:8080 is your local port and server.
+- You can use this url to test live https://csvmatrix.herokuapp.com/flatten 
 ```javascript
-let datetime = "2020-02-3:1:30:10";
-datetime = timestamp.getTimeStampNow(datetime);
-console.log(datetime); //1580526090010
+curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/flatten
+
+Output = "1,2,3,4,5,6,7,8,9"
 ```
 
+### CSV Matrix Sum  
+- To print csv matrix Sum
+- Test command below with terminal 
+- Note: this must be a valid path in your machine @/Users/Sandy/Downloads/matrix.csv
+- http://localhost:8080 is your local port and server.
+- You can use this url to test live https://csvmatrix.herokuapp.com/sum 
+```javascript
+curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/sum
+
+Output = "45"
+```
+
+### CSV Matrix Multiply  
+- To print csv matrix multiply
+- Test command below with terminal 
+- Note: this must be a valid path in your machine @/Users/Sandy/Downloads/matrix.csv
+- http://localhost:8080 is your local port and server.
+- You can use this url to test live https://csvmatrix.herokuapp.com/multiply 
+```javascript
+curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/multiply
+
+Output = "362880"
+```
 
 ### Tests
 #### Cli
 ```bash
 npm install
-npm test
+npm run test
 ```
 
 #### Contributors
 
-- [Ezeibe Sandra Chioma](https://gitlab.com/chiomatm30)
+- [Repository](https://github.com/sandysci/MatrixLeague.git)
+
+- [Ezeibe Sandra Chioma Profile](https://queenofcodes.herokuapp.com)
+
+- [API BASEURL LIVE](https://csvmatrix.herokuapp.com/)

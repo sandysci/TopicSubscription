@@ -7,7 +7,7 @@ const fileUpload = require("express-fileupload");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+// set up express for file upload
 app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: '/tmp/',
@@ -17,7 +17,7 @@ app.use(fileUpload({
 
 app.use('/', require('./src/routes/index'));
 
-
+// Returns if route is not found
 app.use(function (req, res) {
   res.status(404).json( {error: 'Route not found'});
 });

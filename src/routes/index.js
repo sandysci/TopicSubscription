@@ -5,13 +5,22 @@ const {validateFileType} = require("../middleware/validateFileType");
 
 /* GET base route. */
 router.get('/', function(req, res, next) {
-  res.json( {title: `Matrix Manipulation`});
+  res.json( {title: `CSV Matrix Manipulation`});
 });
 
-/* ECHO csv page. */
+/* ECHO csv matrix route. */
 router.post('/echo',validateFileType, matrixController.echo);
+
+/* INVERT csv matrix route. */
 router.post('/invert',validateFileType, matrixController.invert);
+
+/* FlATTEN csv matrix route. */
 router.post('/flatten',validateFileType, matrixController.flatten);
+
+/* SUM csv matrix route. */
 router.post('/sum',validateFileType, matrixController.sum);
+
+/* MULTIPLY csv matrix route. */
 router.post('/multiply',validateFileType, matrixController.multiply);
+
 module.exports = router;
