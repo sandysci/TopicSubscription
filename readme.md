@@ -38,7 +38,7 @@ Output = "1,2,3\n4,5,6\n7,8,9"
 - Test command below with terminal 
 - Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
 - http://localhost:8080/invert is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/echo instead of using your local url
+- You can use this url to test live https://csvmatrix.herokuapp.com/invert instead of using your local url
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/invert
 
@@ -50,7 +50,7 @@ Output = "1,4,7\n2,5,8\n3,6,9\n"
 - Test command below with terminal 
 - Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
 - http://localhost:8080/flatten is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/echo instead of using your local url
+- You can use this url to test live https://csvmatrix.herokuapp.com/flatten instead of using your local url
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/flatten
 
@@ -62,7 +62,7 @@ Output = "1,2,3,4,5,6,7,8,9"
 - Test command below with terminal 
 - Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
 - http://localhost:8080/sum is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/echo instead of using your local url
+- You can use this url to test live https://csvmatrix.herokuapp.com/sum instead of using your local url
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/sum
 
@@ -74,7 +74,7 @@ Output = "45"
 - Test command below with terminal 
 - Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
 - http://localhost:8080/multiply is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/echo instead of using your local url
+- You can use this url to test live https://csvmatrix.herokuapp.com/multiply instead of using your local url
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/multiply
 
