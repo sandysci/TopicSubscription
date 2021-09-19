@@ -6,7 +6,7 @@ Live API BaseUrl: https://csvmatrix.herokuapp.com/
 
 ## Installation
 ```
-- Open terminal
+- Open terminal or command prompt
 - install npm ( >= version 6)
 - install node js (>= version 14)
 - confirm installation of node with this commands(node -v and npm -v)
