@@ -83,10 +83,7 @@ describe('CSV Matrix Sum', () => {
         expect(res.text).to.be.a("string");
         expect(res.text).to.be.eq("45");
 
-
     });
-
-
 
 });
 
@@ -103,7 +100,6 @@ describe('CSV Matrix Multiply', () => {
         expect(res.status).to.equal(200);
         expect(res.text).to.be.a("string");
         expect(res.text).to.be.eq("362880");
-
 
     });
 

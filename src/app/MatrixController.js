@@ -47,7 +47,7 @@ function hasDecimal (num) {
             let word = row[i].split(',');
             // check number of rows == number of columns
             if(word.length !== len  ){
-                return  {error:  "Invalid csv !!!  row length must be equal to the total columns length "};
+                return  {error:  "Invalid csv !!! row length must be equal to the total columns length "};
             }
             // checks if it is a valid integer
             if(!IsValidInteger(word))
@@ -55,10 +55,6 @@ function hasDecimal (num) {
             finalArray.push(word);
         }
         return  {data: finalArray,result:data};
-
-
-
-
 
     }
     catch (e) {
@@ -80,9 +76,6 @@ exports.echo = async (req, res) => {
         if(error)
             return errorResponse(res, error);
         return successResponseText(res, finalArray);
-
-
-
     }
     catch (e) {
         return errorResponse(res, e.message);
@@ -108,7 +101,6 @@ exports.invert = async (req, res) => {
     try {
     let result = '';
        let {error,data:finalArray} = await validateCSVRules(req);
-
         if(error)
             return errorResponse(res, error);
 
@@ -145,7 +137,6 @@ exports.flatten = async (req, res) => {
         if(error)
             return errorResponse(res, error);
 
-
         for(let j = 0 ; j < finalArray.length; j++){
             console.log("each",finalArray[j]);
             let add = '';
@@ -155,10 +146,7 @@ exports.flatten = async (req, res) => {
             result += finalArray[j]+add;
         }
 
-
         return successResponseText(res, result);
-
-
 
     }
     catch (e) {
@@ -203,7 +191,6 @@ exports.sum = async (req, res) => {
  */
 exports.multiply = async (req, res) => {
     try {
-
         let product = 1;
         let {error,data:finalArray} = await validateCSVRules(req);
 
@@ -213,8 +200,7 @@ exports.multiply = async (req, res) => {
         for(let j = 0 ; j < finalArray.length; j++){
             product *= finalArray[j].reduce((a, b) => parseInt(a) * parseInt(b), 1);
         }
-        console.log("product----",product);
-
+        console.log("multiply----",product);
         return successResponseText(res, product.toString());
 
     }
