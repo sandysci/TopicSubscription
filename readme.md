@@ -31,7 +31,7 @@ Live API BaseUrl: https://csvmatrix.herokuapp.com/
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/echo
 
-Output = "1,2,3\n4,5,6\n7,8,9"
+Output = "1,2,3\n4,5,6\n7,8,9\n"
 ```
 ### CSV Matrix Invert  
 - To print csv matrix invert
@@ -54,7 +54,7 @@ Output = "1,4,7\n2,5,8\n3,6,9\n"
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/flatten
 
-Output = "1,2,3,4,5,6,7,8,9"
+Output = "1,2,3,4,5,6,7,8,9\n"
 ```
 
 ### CSV Matrix Sum  
@@ -66,7 +66,7 @@ Output = "1,2,3,4,5,6,7,8,9"
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/sum
 
-Output = "45"
+Output = "45\n"
 ```
 
 ### CSV Matrix Multiply  
@@ -78,7 +78,7 @@ Output = "45"
 ```javascript
 curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/multiply
 
-Output = "362880"
+Output = "362880\n"
 ```
 
 ### Tests

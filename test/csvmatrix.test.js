@@ -19,7 +19,7 @@ describe('CSV Matrix Echo', () => {
             console.log("CSV Matrix Echo Result","\n", res.text);
             expect(res.status).to.equal(200);
             expect(res.text).to.be.a("string");
-            expect(res.text).to.be.eq("1,2,3\n4,5,6\n7,8,9");
+            expect(res.text).to.be.eq("1,2,3\n4,5,6\n7,8,9\n");
 
 
     });
@@ -60,7 +60,7 @@ describe('CSV Matrix Flatten', () => {
         console.log("CSV Matrix Flatten Result","\n", res.text);
         expect(res.status).to.equal(200);
         expect(res.text).to.be.a("string");
-        expect(res.text).to.be.eq("1,2,3,4,5,6,7,8,9");
+        expect(res.text).to.be.eq("1,2,3,4,5,6,7,8,9\n");
 
 
     });
@@ -81,7 +81,7 @@ describe('CSV Matrix Sum', () => {
         console.log("CSV Matrix Sum Result","\n", res.text);
         expect(res.status).to.equal(200);
         expect(res.text).to.be.a("string");
-        expect(res.text).to.be.eq("45");
+        expect(res.text).to.be.eq("45\n");
 
     });
 
@@ -99,7 +99,7 @@ describe('CSV Matrix Multiply', () => {
         console.log("CSV Matrix Multiply Result","\n", res.text);
         expect(res.status).to.equal(200);
         expect(res.text).to.be.a("string");
-        expect(res.text).to.be.eq("362880");
+        expect(res.text).to.be.eq("362880\n");
 
     });
 
