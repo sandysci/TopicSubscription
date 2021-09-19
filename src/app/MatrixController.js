@@ -75,7 +75,7 @@ exports.echo = async (req, res) => {
         let {error,result:finalArray} = await validateCSVRules(req);
         if(error)
             return errorResponse(res, error);
-        return successResponseText(res, finalArray);
+        return successResponseText(res, finalArray+"\n");
     }
     catch (e) {
         return errorResponse(res, e.message);
@@ -146,7 +146,7 @@ exports.flatten = async (req, res) => {
             result += finalArray[j]+add;
         }
 
-        return successResponseText(res, result);
+        return successResponseText(res, result+"\n");
 
     }
     catch (e) {
@@ -174,7 +174,7 @@ exports.sum = async (req, res) => {
         }
         console.log("sum----",sum);
 
-        return successResponseText(res, sum.toString());
+        return successResponseText(res, sum.toString()+"\n");
 
     }
     catch (e) {
@@ -201,7 +201,7 @@ exports.multiply = async (req, res) => {
             product *= finalArray[j].reduce((a, b) => parseInt(a) * parseInt(b), 1);
         }
         console.log("multiply----",product);
-        return successResponseText(res, product.toString());
+        return successResponseText(res, product.toString()+"\n");
 
     }
     catch (e) {
