@@ -9,7 +9,7 @@ Live API BaseUrl: https://csvmatrix.herokuapp.com/
 - Open terminal or command prompt
 - install npm ( >= version 6)
 - install node js (>= version 14)
-- confirm installation of node with this commands(node -v and npm -v)
+- confirm installation of node and npm with this commands(node -v and npm -v)
 - install git on local machine
 - clone project using this command git clone https://github.com/sandysci/MatrixLeague.git
 - or 

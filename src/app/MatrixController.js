@@ -28,23 +28,27 @@ function hasDecimal (num) {
  * @returns {Promise<{error: string}|{error: *}|{result: *, data: *}>}
  */
 
-    async function  validateCSVRules(req){
+// O(N)
+    async function  validateCSVRules(req ){
     try {
 
         let {file} =  req?.files || req?.body;
         let finalArray = [];
 
-
+        // convert file to buffer the read File keeps file in memory so it can be optimized by using fs.createReadStream (doesn't keep in memory good for large csv)
         let data = await fs.readFile(file?.tempFilePath|| file) ;
+
         // check csv is not empty
         if(data.length <= 0)
             return {error: "csv cannot be empty, enter a valid csv"};
-
+        // converts buffer to string and splits by '\n' it returns a row  of array
         let row =  data.toString().split('\n');
 
         let len = row.length;
         for(let i = 0 ; i < len ; i++){
+            // get the length of each content
             let word = row[i].split(',');
+
             // check number of rows == number of columns
             if(word.length !== len  ){
                 return  {error:  "Invalid csv !!! row length must be equal to the total columns length "};
@@ -73,6 +77,7 @@ exports.echo = async (req, res) => {
     try {
 
         let {error,result:finalArray} = await validateCSVRules(req);
+
         if(error)
             return errorResponse(res, error);
         return successResponseText(res, finalArray+"\n");
@@ -84,10 +89,10 @@ exports.echo = async (req, res) => {
 
 
 //NOTE for Invert:
-// O(n log n)
-
+//
+//every function in javascript takes this parameter (currentValue, index, arr)
 //The example above will do only 6 iterations.
-// For bigger matrix, say 100x100 it will do 4,900 iterations, this is 51% faster than any other solution provided here.
+// For bigger matrix, say 100x100 it will do 4,900 iterations, this is 51% faster than any other solution .
 //
 // The principle is simple, you on only iterate through the upper diagonal half of the matrix, because the diagonal line never changes and the bottom diagonal half being is switched together with the upper one, so there is no reason to iterate through it as well. This way, you save a lot of running time, especially in a large matrix.
 
@@ -103,19 +108,36 @@ exports.invert = async (req, res) => {
        let {error,data:finalArray} = await validateCSVRules(req);
         if(error)
             return errorResponse(res, error);
+        finalArray.every((r, i, a) => (
+            r.every((_, j) => (
 
-        finalArray.every((r, i, a) => (r.every((_, j) => (
-                    // console.log(a.length,j),
-                     j = a.length-j-1,
-                    [ r[j], a[j][i] ] = [ a[j][i], r[j] ],
-                     i < j-1
-            )),
+                    j = a.length-j-1,
+                        console.log("r is--",r),
+                        console.log("j is--",j),
+                        console.log("i is--",i),
+                        console.log("old array value--",[ r[j], a[j][i] ]),
+                        [ r[j], a[j][i] ] = [ a[j][i], r[j] ],
+                        console.log("new array value--",[ r[j], a[j][i] ]),
+                        console.log("each array value 2--",[ a[j][i], r[j] ]),
 
+                    i < j-1
+                )),
             i < finalArray.length-2,
-
-             result+=r.join()+"\n"
-        )
-        );
+                result+=r.join()+"\n" // join the row with comma
+        ));
+        // return successResponseText(res, finalArray );
+        // finalArray.every((r, i, a) => (r.every((_, j) => (
+        //             // console.log(a.length,j),
+        //              j = a.length-j-1,
+        //             [ r[j], a[j][i] ] = [ a[j][i], r[j] ],
+        //              i < j-1
+        //     )),
+        //
+        //     i < finalArray.length-2,
+        //
+        //      result+=r.join()+"\n"
+        // )
+        // );
         return successResponseText(res, result );
     }
     catch (e) {
@@ -133,7 +155,6 @@ exports.flatten = async (req, res) => {
 
         let result = '';
         let {error,data:finalArray} = await validateCSVRules(req);
-
         if(error)
             return errorResponse(res, error);
 
@@ -144,6 +165,7 @@ exports.flatten = async (req, res) => {
                 add = ',';
             }
             result += finalArray[j]+add;
+            console.log("result",result);
         }
 
         return successResponseText(res, result+"\n");
@@ -160,6 +182,7 @@ exports.flatten = async (req, res) => {
  * @param res
  * @returns {Promise<*>}
  */
+
 exports.sum = async (req, res) => {
     try {
 
@@ -171,8 +194,8 @@ exports.sum = async (req, res) => {
         for(let j = 0 ; j < finalArray.length; j++){
 
             sum += finalArray[j].reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            console.log("sum----",sum);
         }
-        console.log("sum----",sum);
 
         return successResponseText(res, sum.toString()+"\n");
 
