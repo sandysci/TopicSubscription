@@ -1,7 +1,7 @@
 {
-  "name": "matrix-manipulation",
+  "name": "topic-subcription",
   "version": "1.0.0",
-  "description": "This the manipulated csv matrix Backend challenge for League Software engineer ",
+  "description": "This is the topic subscription publisher challenge ",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -34,6 +34,7 @@
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
     "mocha": "^9.1.1",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "ws": "^8.3.0"
   }
 }

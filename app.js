@@ -1,19 +1,19 @@
 "use strict";
 
 require("./src/Helper");
+
 var express = require('express');
+
 var app = express();
-const fileUpload = require("express-fileupload");
+
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, '/public')));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // set up express for file upload
-app.use(fileUpload({
-  useTempFiles: true,
-  tempFileDir: '/tmp/',
-  debug: true,
-  preserveExtension: true
-}));
 
 app.use('/', require('./src/routes/index'));
 
@@ -31,7 +31,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send({error: err && err.message || " Matrix!!!, Sorry An error occurred"});
+  res.send({error: err && err.message || " Topic Subscription!!!, Sorry An error occurred"});
 });
 
 

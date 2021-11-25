@@ -5,6 +5,8 @@ const debug = require('debug')(process.env.DEBUG);
 const http = require('http');
 const {log} = console;
 
+const server = http.createServer(app);
+
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -57,6 +59,34 @@ function onError(error,port) {
  * Event listener for HTTP server "listening" event.
  */
 
+const setupWebSocket = async ()=>{
+    const WebSocketServer = require('ws').Server;
+    const PubSubManager = require('./pubsub');
+    const pubSubManager = new PubSubManager();
+    const wss = new WebSocketServer({ server: server });
+    wss.on('connection', (ws, req) => {
+        console.log(`Connection request from: ${req.connection.remoteAddress}`);
+        ws.on('message', (data) => {
+            console.log('data: ' + data);
+            const json = JSON.parse(data);
+            const request = json.request;
+            const message = json.message;
+            const channel = json.channel;
+
+            switch (request) {
+                case 'PUBLISH':
+                    pubSubManager.publish(ws, channel, message);
+                    break;
+                case 'SUBSCRIBE':
+                    pubSubManager.subscribe(ws, channel);
+                    break;
+            }
+        });
+        ws.on('close', () => {
+            console.log('Stopping client connection.');
+        });
+    });
+}
 
 const setupExpress = async () => {
 
@@ -70,14 +100,14 @@ const setupExpress = async () => {
          * Create HTTP server.
          */
 
-        const server = http.createServer(app);
+
         /**
          * Get port from environment and store in Express.
          */
 
         const port = process.env.PORT ||normalizePort('8080');
         app.set('port', port);
-        log(" Server Starting up ON", port, 'Matrix manipulation');
+        log(" Server Starting up ON", port, 'Topic Subscription');
         /**
          * Listen on provided port, on all network implementations.
          */
@@ -112,4 +142,5 @@ const setupExpress = async () => {
     }
 };
 // start server
+setupWebSocket();
 setupExpress();
