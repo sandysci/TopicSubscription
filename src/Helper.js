@@ -1,5 +1,7 @@
 'use strict';
 
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache();
 /***
  * the success response in json format
  * @param res
@@ -9,7 +11,7 @@
  */
 global.successResponse = (res, data, code = 200) => {
     return res.status(code).send(
-        {data}
+        data
 
     );
 };
@@ -36,6 +38,16 @@ global.errorResponse = (res, error = "Oops. An Error Occurred", code = 500) => {
     return res.status(code).send({
         error: error
     });
+};
+
+global.setCache = (key, val ,ttl = 40000000) => {
+   return  myCache.set( key, val,  ttl  )
+
+};
+
+global.getCache = (key) => {
+   return myCache.get( key )
+
 };
 
 

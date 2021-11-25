@@ -12,6 +12,7 @@
         }
     </style>
     <script>
+        console.log(window.document.location.host.replace(/:.*/, ''));
         function subscribe() {
             var message = document.getElementById('message');
             var channel = document.getElementById('channel').value;

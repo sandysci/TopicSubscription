@@ -1,26 +1,17 @@
 var express = require('express');
 var router = express.Router();
-const matrixController = require("../app/MatrixController");
-const {validateFileType} = require("../middleware/validateFileType");
+const topicSubscriptionController = require("../app/TopicSubscriptionController");
+const {validateUrlType,validateDataType} = require("../middleware/validateUrl");
 
 /* GET base route. */
 router.get('/', function(req, res, next) {
-  res.json( {title: `Backend League Challenge CSV Matrix Manipulation`});
+  res.json( {title: `Topic Subscription`});
 });
 
-/* ECHO csv matrix route. */
-router.post('/echo',validateFileType, matrixController.echo);
+/* subscribe to a topic. */
+router.post('/subscribe/:topic',validateUrlType,topicSubscriptionController.subscribe);
+router.post('/publish/:topic',validateDataType,topicSubscriptionController.publish);
 
-/* INVERT csv matrix route. */
-router.post('/invert',validateFileType, matrixController.invert);
 
-/* FlATTEN csv matrix route. */
-router.post('/flatten',validateFileType, matrixController.flatten);
-
-/* SUM csv matrix route. */
-router.post('/sum',validateFileType, matrixController.sum);
-
-/* MULTIPLY csv matrix route. */
-router.post('/multiply',validateFileType, matrixController.multiply);
 
 module.exports = router;
