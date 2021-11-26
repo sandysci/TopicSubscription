@@ -25,16 +25,18 @@ Live API BaseUrl: (https://topicsubscription.herokuapp.com/)
 ### Subscribe Topic   
 - To Subscribe to a topic
 - Test using the command below in your terminal 
-- Note: this must be a valid post url endpoint  e.g http://localhost:9000/test1
+- Note: this must be a valid post url endpoint  e.g http://localhost:8000/test1
 - You can use this url to test live (https://topicsubscription.herokuapp.com/subscribe/topic1) instead of using your local url
 ```javascript
 Local:
-curl -X POST -H "Content-Type: application/json" -d '{ "url": "http://localhost:9000/test1"}' http://localhost:8000/subscribe/topic1 
+curl -X POST -H "Content-Type: application/json" -d '{ "url": "http://localhost:8000/test1"}' http://localhost:8000/subscribe/topic1 
 Live: 
-curl -X POST -H "Content-Type: application/json" -d '{ "url": "http://localhost:9000/test1"}' https://topicsubscription.herokuapp.com/subscribe/topic1 
+curl -X POST -H "Content-Type: application/json" -d '{ "url": "https://topicsubscription.herokuapp.com/test1"}' https://topicsubscription.herokuapp.com/subscribe/topic1 
 
 
 Output = {"url":"http://localhost:8000/test1","topic":"topic1"}
+or 
+Output ={"url":"https://topicsubscription.herokuapp.com/test1","topic":"topic1"}
 ```
 ### Publish Topic Message to Subscribers 
 - To public message to all subscriber of a topic
