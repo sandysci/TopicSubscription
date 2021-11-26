@@ -21,6 +21,12 @@ exports.subscribe = async (req, res) => {
     }
 };
 
+/****
+ * Returns the success/failed after publishing a topic
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 exports.publish = async (req, res) => {
     try {
         let topic = req.query.topic || req.params.topic;
@@ -34,6 +40,13 @@ exports.publish = async (req, res) => {
         return errorResponse(res, e.message);
     }
 };
+
+/****
+ * Returns the payload back to test url
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
 exports.testEndpoint = async (req, res) => {
     try {
         return successResponse(res, req.body);

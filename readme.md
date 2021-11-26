@@ -22,64 +22,36 @@ Live API BaseUrl: (https://topicsubscription.herokuapp.com/)
 ```
 
 
-### CSV Matrix Echo  
-- To print csv matrix echo
-- Test command below with terminal 
-- Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
-- http://localhost:8080/echo is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/echo instead of using your local url
+### Subscribe Topic   
+- To Subscribe to a topic
+- Test using the command below in your terminal 
+- Note: this must be a valid post url endpoint  e.g http://localhost:9000/test1
+- You can use this url to test live (https://topicsubscription.herokuapp.com/subscribe/topic1 instead of using your local url
 ```javascript
-curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/echo
+Local:
+curl -X POST -H "Content-Type: application/json" -d '{ "url": "http://localhost:9000/test1"}' http://localhost:8000/subscribe/topic1 
+Live: 
+curl -X POST -H "Content-Type: application/json" -d '{ "url": "http://localhost:9000/test1"}' https://topicsubscription.herokuapp.com/subscribe/topic1 
 
-Output = "1,2,3\n4,5,6\n7,8,9\n"
+
+Output = {"url":"http://localhost:8000/test1","topic":"topic1"}
 ```
-### CSV Matrix Invert  
-- To print csv matrix invert
+### Publish Topic Message to Subscribers 
+- To public message to all subscriber of a topic
 - Test command below with terminal 
-- Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
-- http://localhost:8080/invert is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/invert instead of using your local url
+- You can use this url to test live (https://topicsubscription.herokuapp.com/publish/topic1 instead of using your local url
 ```javascript
-curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/invert
+Local:
+ curl -X POST -H "Content-Type: application/json" -d '{"message": "hello"}' http://localhost:8000/publish/topic1
 
-Output = "1,4,7\n2,5,8\n3,6,9\n"
-```
+Live: 
+curl -X POST -H "Content-Type: application/json" -d '{"message": "hello"}' https://topicsubscription.herokuapp.com/publish/topic1
 
-### CSV Matrix flatten  
-- To print csv matrix flatten
-- Test command below with terminal 
-- Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
-- http://localhost:8080/flatten is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/flatten instead of using your local url
-```javascript
-curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/flatten
-
-Output = "1,2,3,4,5,6,7,8,9\n"
+Error Output = {"error":"connect ECONNREFUSED 127.0.0.1:8000,connect ECONNREFUSED 127.0.0.1:8000"}
+Success Output = {status: "success",data: "Message has been pushed to subscribers"}
 ```
 
-### CSV Matrix Sum  
-- To print csv matrix Sum
-- Test command below with terminal 
-- Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
-- http://localhost:8080/sum is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/sum instead of using your local url
-```javascript
-curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/sum
 
-Output = "45\n"
-```
-
-### CSV Matrix Multiply  
-- To print csv matrix multiply
-- Test command below with terminal 
-- Note: this must be a valid path to the csv file in your machine e.g @/Users/Sandy/Downloads/matrix.csv
-- http://localhost:8080/multiply is the endpoint in your local port and server.
-- You can use this url to test live https://csvmatrix.herokuapp.com/multiply instead of using your local url
-```javascript
-curl -i -X POST -H "Content-Type: multipart/form-data" -F "file=@/Users/Sandy/Downloads/matrix.csv" http://localhost:8080/multiply
-
-Output = "362880\n"
-```
 
 ### Tests
 #### Cli

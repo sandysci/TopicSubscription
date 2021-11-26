@@ -1,6 +1,5 @@
 "use strict";
 
-
 /***
  * Validate url string
  * Ensure it is a valid url
@@ -13,9 +12,7 @@ exports.validateUrlType = async (req, res, next) => {
     try {
         // checks url name
         let payload =  req?.body?.url;
-
         if (!payload) return errorResponse(res, "valid url must be passed", 401);
-
 
         return next();
     } catch (e) {
