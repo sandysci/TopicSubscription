@@ -28,10 +28,18 @@ exports.connectandPublishWebsocket = async (topic,message) => {
     try {
         let errorList = [];
         let data = await getCache(topic);
+
         //Push all subscribers
-        if(data) {
+        if (!data) {
+            return {
+                data: {
+                    status: "success",
+                    data: "Message has been pushed even though there are subscribers"
+                }
+            };
+        } else {
             const result = await data.map(async (item) => {
-                let {error} = await sendCallBacKURL(item, message);
+                let {data: Ldata, error} = await sendCallBacKURL(item, message);
                 if (error) {
                     errorList.push(error);
                 }
@@ -39,26 +47,25 @@ exports.connectandPublishWebsocket = async (topic,message) => {
             });
             await Promise.all(result);
 
-            if (errorList) {
-                let r =  errorList.join();
+            if (errorList.length) {
+                let r = errorList.join();
                 return {
                     error: r
                 }
             }
+            return {
+                data: {
+                    status: "success",
+                    data: "Message has been pushed to subscribers"
+                }
+            };
         }
-
-        return {
-            data:{
-                status:"success",
-                data:"Message has been pushed to subscribers"
-            }
-        };
 
 
     } catch (e) {
         console.log("Error Pushing Request",e);
         return {
-            error: (e?.response?.data?.error) ||(e?.response?.data?.message) || e.message
+            error:  e.message
         }
     }
 

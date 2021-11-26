@@ -1,8 +1,8 @@
-BACKEND LEAGUE CHALLENGE CSV MATRIX 
+BACKEND PANGAEA CHALLENGE TOPIC SUBSCRIPTION 
 ===========
-League csv-matrix - This is the solution for league backend challenge
+PANGAEA Topic-subscribers - This is the solution for topic subscribers challenge
 ---------------
-Live API BaseUrl: https://csvmatrix.herokuapp.com/
+Live API BaseUrl: (https://topicsubscription.herokuapp.com/)
 
 ## Installation
 ```
@@ -11,9 +11,9 @@ Live API BaseUrl: https://csvmatrix.herokuapp.com/
 - install node js (>= version 14)
 - confirm installation of node and npm with this commands(node -v and npm -v)
 - install git on local machine
-- clone project using this command git clone https://github.com/sandysci/MatrixLeague.git
+- clone project using this command git clone https://github.com/sandysci/TopicSubscription.git
 - or 
-- clone project using this command git clone git@github.com:sandysci/MatrixLeague.git
+- clone project using this command git clone git@github.com:sandysci/TopicSubscription.git
 - pull from main branch or master branch 
 - npm install
 - npm run dev 
@@ -90,8 +90,8 @@ npm run test
 
 #### Contributors
 
-- [Repository](https://github.com/sandysci/MatrixLeague.git)
+- [Repository](https://github.com/sandysci/TopicSubscription)
 
 - [Ezeibe Sandra Chioma Profile](https://queenofcodes.herokuapp.com)
 
-- [API BASEURL LIVE](https://csvmatrix.herokuapp.com/)
+- [API BASEURL LIVE](https://topicsubscription.herokuapp.com/)

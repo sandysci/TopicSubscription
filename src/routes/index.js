@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
 /* subscribe to a topic. */
 router.post('/subscribe/:topic',validateUrlType,topicSubscriptionController.subscribe);
 router.post('/publish/:topic',validateDataType,topicSubscriptionController.publish);
+router.post('/:anything',topicSubscriptionController.testEndpoint);
 
 
 

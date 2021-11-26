@@ -51,12 +51,14 @@ global.getCache = (key) => {
 
 };
 exports.sendCallBacKURL= async (url,payload,header=null) =>{
-    // console.log("CallbackURL Sending-----",url,payload,header);
+    //console.log("CallbackURL Sending-----",url,payload,header);
     let res =axios.post(url, payload,header)
         .then(res => {
-            // console.log("CallBackURL Response",res);
+          //  console.log("CallBackURL Response",res);
+            return {"data":"sent"};
+
         }).catch((debug)=>{
-        // console.log("CallBackURL Response error",debug);
+      //  console.log("CallBackURL Response error",debug);
             return {"error":debug.message};
 
     });

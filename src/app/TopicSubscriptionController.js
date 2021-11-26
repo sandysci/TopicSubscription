@@ -34,6 +34,14 @@ exports.publish = async (req, res) => {
         return errorResponse(res, e.message);
     }
 };
+exports.testEndpoint = async (req, res) => {
+    try {
+        return successResponse(res, req.body);
 
+    }
+    catch (e) {
+        return errorResponse(res, e.message);
+    }
+};
 
 

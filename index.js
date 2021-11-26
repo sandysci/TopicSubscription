@@ -73,7 +73,7 @@ const setupExpress = async () => {
          * Get port from environment and store in Express.
          */
 
-        const port = process.env.PORT ||normalizePort('8080');
+        const port = process.env.PORT ||normalizePort('8000');
         app.set('port', port);
         log(" Server Starting up ON", port, 'Topic Subscription');
         /**

@@ -25,8 +25,8 @@ exports.validateUrlType = async (req, res, next) => {
 };
 
 /***
- * Validate url string
- * Ensure it is a valid url
+ * Validate data
+ * Ensure it is a valid json object
  * @param req
  * @param res
  * @param next
@@ -50,6 +50,6 @@ exports.validateDataType = async (req, res, next) => {
         return next();
     } catch (e) {
         console.log(e.message);
-        return errorResponse(res, "Error!!! valid data must be passed", 401);
+        return errorResponse(res, "Error!!! valid json  §data must be passed", 401);
     }
 };
