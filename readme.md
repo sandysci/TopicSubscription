@@ -39,7 +39,7 @@ or
 Output ={"url":"https://topicsubscription.herokuapp.com/test1","topic":"topic1"}
 ```
 ### Publish Topic Message to Subscribers 
-- To public message to all subscriber of a topic
+- To publish message to all subscriber of a topic
 - Test command below with terminal 
 - You can use this url to test live (https://topicsubscription.herokuapp.com/publish/topic1) instead of using your local url
 ```javascript
@@ -62,7 +62,7 @@ npm install
 npm run test
 ```
 
-#### Contributors
+#### Written by
 
 - [Repository](https://github.com/sandysci/TopicSubscription)
 
