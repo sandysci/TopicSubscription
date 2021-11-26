@@ -62,7 +62,7 @@ npm install
 npm run test
 ```
 
-#### Written by
+#### BIO
 
 - [Repository](https://github.com/sandysci/TopicSubscription)
 
