@@ -39,7 +39,7 @@ Output = {"url":"http://localhost:8000/test1","topic":"topic1"}
 ### Publish Topic Message to Subscribers 
 - To public message to all subscriber of a topic
 - Test command below with terminal 
-- You can use this url to test live (https://topicsubscription.herokuapp.com/publish/topic1 instead of using your local url
+- You can use this url to test live (https://topicsubscription.herokuapp.com/publish/topic1) instead of using your local url
 ```javascript
 Local:
  curl -X POST -H "Content-Type: application/json" -d '{"message": "hello"}' http://localhost:8000/publish/topic1
