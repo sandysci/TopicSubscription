@@ -13,11 +13,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sandysci/MatrixLeague"
+    "url": "https://github.com/sandysci/TopicSubscription"
   },
   "keywords": [
-    "matrix",
-    "csv",
+    "topic",
+    "subscription",
     "heroku"
   ],
   "engines": {
@@ -26,6 +26,7 @@
   "author": "Ezeibe Sandra Chioma",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.24.0",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "express": "^4.17.1",

@@ -2,6 +2,7 @@
 
 const NodeCache = require( "node-cache" );
 const myCache = new NodeCache();
+const axios = require("axios");
 /***
  * the success response in json format
  * @param res
@@ -40,7 +41,7 @@ global.errorResponse = (res, error = "Oops. An Error Occurred", code = 500) => {
     });
 };
 
-global.setCache = (key, val ,ttl = 40000000) => {
+global.setCache = (key, val ,ttl = 4000000000000000) => {
    return  myCache.set( key, val,  ttl  )
 
 };
@@ -49,5 +50,18 @@ global.getCache = (key) => {
    return myCache.get( key )
 
 };
+exports.sendCallBacKURL= async (url,payload,header=null) =>{
+    // console.log("CallbackURL Sending-----",url,payload,header);
+    let res =axios.post(url, payload,header)
+        .then(res => {
+            // console.log("CallBackURL Response",res);
+        }).catch((debug)=>{
+        // console.log("CallBackURL Response error",debug);
+            return {"error":debug.message};
+
+    });
+    return  res;
+}
+
 
 

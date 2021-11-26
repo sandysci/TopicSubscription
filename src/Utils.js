@@ -1,19 +1,11 @@
 "use strict";
 
-const WebSocket = require('ws');
-exports.connectandSubscribeWebsocket = async (topic,url) => {
+
+const {sendCallBacKURL}   = require('./Helper');
+
+exports.connectandSubscribeWebsocket = async (topic, url) => {
     try {
 
-
-        var ws = new WebSocket('ws://localhost:8080');
-        ws.onopen = function () {
-            ws.send(JSON.stringify({
-                request: 'SUBSCRIBE',
-                message: '',
-                channel: topic
-            }));
-
-        };
         await addUrlTOCache(topic,url);
         return {
             data:{
@@ -21,8 +13,6 @@ exports.connectandSubscribeWebsocket = async (topic,url) => {
                 topic
             }
         };
-
-
     } catch (e) {
         console.log("error Websocket Request",e);
         return {
@@ -36,27 +26,37 @@ exports.connectandSubscribeWebsocket = async (topic,url) => {
 
 exports.connectandPublishWebsocket = async (topic,message) => {
     try {
+        let errorList = [];
+        let data = await getCache(topic);
+        //Push all subscribers
+        if(data) {
+            const result = await data.map(async (item) => {
+                let {error} = await sendCallBacKURL(item, message);
+                if (error) {
+                    errorList.push(error);
+                }
 
-        var ws = new WebSocket('ws://localhost:8080');
-        ws.onopen = function () {
-            ws.send(JSON.stringify({
-                request: 'PUBLISH',
-                message: message,
-                channel: topic
-            }));
+            });
+            await Promise.all(result);
 
-        };
-        await addUrlTOCache(topic,url);
+            if (errorList) {
+                let r =  errorList.join();
+                return {
+                    error: r
+                }
+            }
+        }
+
         return {
             data:{
-                url,
-                topic
+                status:"success",
+                data:"Message has been pushed to subscribers"
             }
         };
 
 
     } catch (e) {
-        console.log("error Websocket Request",e);
+        console.log("Error Pushing Request",e);
         return {
             error: (e?.response?.data?.error) ||(e?.response?.data?.message) || e.message
         }
