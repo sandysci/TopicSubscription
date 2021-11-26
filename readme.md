@@ -26,7 +26,7 @@ Live API BaseUrl: (https://topicsubscription.herokuapp.com/)
 - To Subscribe to a topic
 - Test using the command below in your terminal 
 - Note: this must be a valid post url endpoint  e.g http://localhost:9000/test1
-- You can use this url to test live (https://topicsubscription.herokuapp.com/subscribe/topic1 instead of using your local url
+- You can use this url to test live (https://topicsubscription.herokuapp.com/subscribe/topic1) instead of using your local url
 ```javascript
 Local:
 curl -X POST -H "Content-Type: application/json" -d '{ "url": "http://localhost:9000/test1"}' http://localhost:8000/subscribe/topic1 
