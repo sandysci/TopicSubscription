@@ -41,7 +41,7 @@ global.errorResponse = (res, error = "Oops. An Error Occurred", code = 500) => {
     });
 };
 
-global.setCache = (key, val ,ttl = 4000000000000000) => {
+global.setCache = (key, val ,ttl = 900) => {
    return  myCache.set( key, val,  ttl  )
 
 };

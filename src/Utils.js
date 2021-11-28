@@ -34,7 +34,7 @@ exports.connectandPublishWebsocket = async (topic,message) => {
             return {
                 data: {
                     status: "success",
-                    data: "Message has been pushed even though there are subscribers"
+                    data: "Message has been pushed even though there are no subscribers"
                 }
             };
         } else {
