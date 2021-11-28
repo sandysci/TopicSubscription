@@ -1,5 +1,5 @@
 
-const {connectandSubscribeWebsocket,connectandPublishWebsocket} = require('../Utils');
+const {publishTopic,createTopic} = require('../Utils');
 
 /****
  * Returns the subscribe url and topic
@@ -11,7 +11,7 @@ exports.subscribe = async (req, res) => {
     try {
         let topic = req.query.topic || req.params.topic;
         if (!topic) return errorResponse(res, "topic must be passed as a query string ");
-        let {data, error} = await connectandSubscribeWebsocket(topic,req.body.url);
+        let {data, error} = await createTopic(topic,req.body.url);
         if(error)  return errorResponse(res, error);
         return successResponse(res, data);
 
@@ -31,7 +31,7 @@ exports.publish = async (req, res) => {
     try {
         let topic = req.query.topic || req.params.topic;
         if (!topic) return errorResponse(res, "topic must be passed as a query string ");
-        let {data, error} = await connectandPublishWebsocket(topic,req.body);
+        let {data, error} = await publishTopic(topic,req.body);
         if(error)  return errorResponse(res, error);
         return successResponse(res, data);
 

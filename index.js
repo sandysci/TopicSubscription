@@ -1,6 +1,7 @@
 "use strict";
 
 const app = require('./app');
+
 const debug = require('debug')(process.env.DEBUG);
 const http = require('http');
 const {log} = console;
